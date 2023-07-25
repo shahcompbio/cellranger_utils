@@ -1,6 +1,13 @@
 import versioneer
 from setuptools import setup, find_packages
 
+requirements = [
+    'click>=7.0',
+    'pandas>=1.0.0',
+    'pyyaml',
+    'pysam'
+]
+
 setup(
     name='cellranger_utils',
     packages=find_packages(),
@@ -14,5 +21,6 @@ setup(
             'cellranger_utils = cellranger_utils.cli:cli'
         ]
     },
+    install_requires=requirements,
     package_data={'': ['*.py', '*.R', '*.npz', "*.yaml", "data/*", "*.sh"]}
 )
