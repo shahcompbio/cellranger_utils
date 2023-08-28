@@ -1,7 +1,7 @@
 """Console script for cellranger utils"""
 
 import click
-import utils as utils
+import cellranger_utils.utils as utils
 
 
 @click.group()
