@@ -139,8 +139,6 @@ def run_cellranger_multi(
         cite_identifier=None,
         numcores=16,
         mempercore=10,
-        maxjobs=200,
-        jobmode='local'
 ):
     config_dir = os.path.join(tempdir, 'configs')
     multiconfig_path = os.path.join(config_dir, 'multiconfig.txt')
@@ -178,9 +176,7 @@ def run_cellranger_multi(
         '--id=' + sampleid,
         f'--localcores={numcores}',
         f'--localmem={mempercore}',
-        f'--maxjobs={maxjobs}',
-        f'--mempercore={mempercore}',
-        f'--jobmode={jobmode}',
+        '--jobmode=local',
         '--disable-ui'
     ]
     cwd = os.getcwd()
@@ -287,8 +283,6 @@ def run_cellranger_multi_vdj(
         bcr_identifier=None,
         numcores=16,
         mempercore=10,
-        maxjobs=200,
-        jobmode='local'
 ):
     config_dir = os.path.join(tempdir, 'configs')
 
@@ -336,9 +330,7 @@ def run_cellranger_multi_vdj(
         '--id=' + sample_id,
         f'--localcores={numcores}',
         f'--localmem={mempercore}',
-        f'--mempercore={mempercore}',
-        f'--maxjobs={maxjobs}',
-        f'--jobmode={jobmode}',
+        '--jobmode=local',
         '--disable-ui'
     ]
 

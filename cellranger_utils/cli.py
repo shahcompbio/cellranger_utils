@@ -20,8 +20,6 @@ def cli():
 @click.option('--tempdir', required=True, help='cores for cellranger multi')
 @click.option('--numcores', required=True, help='cores for cellranger multi')
 @click.option('--mempercore', required=True, help='cores for cellranger multi')
-@click.option('--maxjobs', required=True, help='cores for cellranger multi')
-@click.option('--jobmode', required=True, help='cores for cellranger multi')
 def cellranger_multi(
         reference,
         meta_yaml,
@@ -33,8 +31,6 @@ def cellranger_multi(
         cite_id=None,
         numcores=16,
         mempercore=10,
-        maxjobs=200,
-        jobmode='local'
 ):
     utils.run_cellranger_multi(
         reference,
@@ -47,8 +43,6 @@ def cellranger_multi(
         cite_identifier=cite_id,
         numcores=numcores,
         mempercore=mempercore,
-        maxjobs=maxjobs,
-        jobmode=jobmode
     )
 
 
@@ -70,8 +64,6 @@ def cellranger_multi(
 @click.option('--bcr_id', help='cores for cellranger multi')
 @click.option('--numcores', required=True, help='cores for cellranger multi')
 @click.option('--mempercore', required=True, help='cores for cellranger multi')
-@click.option('--maxjobs', required=True, help='cores for cellranger multi')
-@click.option('--jobmode', required=True, help='cores for cellranger multi')
 def cellranger_multi_vdj(
         reference,
         vdj_reference,
@@ -90,8 +82,6 @@ def cellranger_multi_vdj(
         bcr_id=None,
         numcores=16,
         mempercore=10,
-        maxjobs=200,
-        jobmode='local'
 ):
     utils.run_cellranger_multi_vdj(
         reference,
@@ -111,8 +101,6 @@ def cellranger_multi_vdj(
         bcr_identifier=bcr_id,
         numcores=numcores,
         mempercore=mempercore,
-        maxjobs=maxjobs,
-        jobmode=jobmode
     )
 
 
