@@ -22,12 +22,12 @@ def cli():
 @click.option('--meta_yaml', required=True, help='memory for cellranger multi')
 @click.option('--tempdir', required=True, help='cores for cellranger multi')
 @click.option('--sample_id', required=True, help='cores for cellranger multi')
-@click.option('--bcr_fastq', help='cores for cellranger multi')
-@click.option('--bcr_id', help='cores for cellranger multi')
-@click.option('--bcr_fastq', help='cores for cellranger multi')
-@click.option('--bcr_id', help='cores for cellranger multi')
+@click.option('--tcr_fastq', help='cores for cellranger multi')
+@click.option('--tcr_id', help='cores for cellranger multi')
 @click.option('--cite_fastq', help='cores for cellranger multi')
 @click.option('--cite_id', help='cores for cellranger multi')
+@click.option('--bcr_fastq', help='cores for cellranger multi')
+@click.option('--bcr_id', help='cores for cellranger multi')
 @click.option('--numcores', default=16, help='cores for cellranger multi')
 @click.option('--mempercore', default=10, help='cores for cellranger multi')
 def cellranger_non_multiplexed(
@@ -112,7 +112,6 @@ def cellranger_demultiplex(
 @click.option('--reference', required=True, help='CSV file path')
 @click.option('--vdj_reference', required=True, help='CSV file path')
 @click.option('--gex_fastq', required=True, help='cores for cellranger multi')
-@click.option('--gex_id', required=True, help='cores for cellranger multi')
 @click.option('--gex_metrics', required=True, help='cores for cellranger multi')
 @click.option('--output', required=True, help='cores for cellranger multi')
 @click.option('--meta_yaml', required=True, help='CSV file path')
@@ -120,13 +119,13 @@ def cellranger_demultiplex(
 @click.option('--sample_id', required=True, help='cores for cellranger multi')
 @click.option('--tcr_fastq', help='cores for cellranger multi')
 @click.option('--tcr_id', help='cores for cellranger multi')
-@click.option('--cite_fastq', help='cores for cellranger multi')
-@click.option('--cite_id', help='cores for cellranger multi')
+@click.option('--cite_hto_fastq', help='cores for cellranger multi')
+@click.option('--cite_hto_id', help='cores for cellranger multi')
 @click.option('--bcr_fastq', help='cores for cellranger multi')
 @click.option('--bcr_id', help='cores for cellranger multi')
-@click.option('--numcores', required=True, help='cores for cellranger multi')
-@click.option('--mempercore', required=True, help='cores for cellranger multi')
-def cellranger_multi_vdj(
+@click.option('--numcores', default=16, help='cores for cellranger multi')
+@click.option('--mempercore', default=10, help='cores for cellranger multi')
+def cellranger_persample(
         reference,
         vdj_reference,
         gex_fastq,
@@ -138,8 +137,8 @@ def cellranger_multi_vdj(
         sample_id,
         tcr_fastq=None,
         tcr_id=None,
-        cite_fastq=None,
-        cite_id=None,
+        cite_hto_fastq=None,
+        cite_hto_id=None,
         bcr_fastq=None,
         bcr_id=None,
         numcores=16,
@@ -157,8 +156,8 @@ def cellranger_multi_vdj(
         sample_id,
         tcr_fastq=tcr_fastq,
         tcr_id=tcr_id,
-        cite_fastq=cite_fastq,
-        cite_id=cite_id,
+        cite_hto_fastq=cite_hto_fastq,
+        cite_hto_id=cite_hto_id,
         bcr_fastq=bcr_fastq,
         bcr_id=bcr_id,
         numcores=numcores,
@@ -176,14 +175,18 @@ def bam_to_fastq(cellranger_demultiplex_dir, outdir, tempdir):
 
 @cli.command()
 @click.option('--meta_yaml', required=True, help='CSV file path')
-def bam_to_fastq(
+@click.option('--cite_hto_id', help='CSV file path')
+@click.option('--tcr_id', help='CSV file path')
+@click.option('--bcr_id', help='CSV file path')
+def check_multiplex_status(
         meta_yaml,
-        tcr_fastq=None,
-        bcr_fastq=None,
+        cite_hto_id=None,
+        tcr_id=None,
+        bcr_id=None,
 ):
     metadata = yaml.safe_load(open(meta_yaml, 'rt'))
 
-    if 'hashtag' in metadata['meta'] and (tcr_fastq is not None or bcr_fastq is not None):
+    if 'hashtag' in metadata['meta'] and (tcr_id is not None or bcr_id is not None) and cite_hto_id is not None:
         print("multiplexed")
     else:
         print("non-multiplexed")
