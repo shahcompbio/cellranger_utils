@@ -1,9 +1,10 @@
 """Console script for cellranger utils"""
-
+import yaml
 import click
 from cellranger_utils.cellranger_demultiplex import run_cellranger_demultiplex
 from cellranger_utils.cellranger_non_multiplexed import run_cellranger_non_multiplexed
 from cellranger_utils.cellranger_persample import run_cellranger_persample
+
 from cellranger_utils.bamtofastq import run_bam_to_fastq
 
 
@@ -171,6 +172,22 @@ def cellranger_multi_vdj(
 @click.option('--tempdir', required=True, help='CSV file path')
 def bam_to_fastq(cellranger_demultiplex_dir, outdir, tempdir):
     run_bam_to_fastq(cellranger_demultiplex_dir, outdir, tempdir)
+
+
+@cli.command()
+@click.option('--meta_yaml', required=True, help='CSV file path')
+def bam_to_fastq(
+        meta_yaml,
+        tcr_fastq=None,
+        bcr_fastq=None,
+):
+    metadata = yaml.safe_load(open(meta_yaml, 'rt'))
+
+    if 'hashtag' in metadata['meta'] and (tcr_fastq is not None or bcr_fastq is not None):
+        print("multiplexed")
+    else:
+        print("non-multiplexed")
+
 
 if __name__ == "__main__":
     cli()
