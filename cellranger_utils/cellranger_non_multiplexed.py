@@ -77,6 +77,8 @@ def run_cellranger_non_multiplexed(
     create_multiconfig(
         metadata, reference, vdj_reference, config_dir, multiconfig_path, fastq_data
     )
+    print(multiconfig_path)
+    print(os.path.exists(multiconfig_path))
 
     cmd = [
         'cellranger',
