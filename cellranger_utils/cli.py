@@ -15,7 +15,7 @@ def cli():
 
 @cli.command()
 @click.option('--reference', required=True, help='CSV file path')
-@click.option('--vdj_reference', required=True, help='CSV file path')
+@click.option('--vdj_reference', help='CSV file path')
 @click.option('--gex_fastq', required=True, help='cores for cellranger multi')
 @click.option('--gex_id', required=True, help='cores for cellranger multi')
 @click.option('--outdir', required=True, help='cores for cellranger multi')
