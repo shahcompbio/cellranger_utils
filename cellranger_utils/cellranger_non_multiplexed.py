@@ -73,12 +73,10 @@ def run_cellranger_non_multiplexed(
 
     metadata = yaml.safe_load(open(meta_yaml, 'rt'))
 
-    multiconfig_path = os.path.join(config_dir, 'multiconfig.txt')
+    multiconfig_path = os.path.abspath(os.path.join(config_dir, 'multiconfig.txt'))
     create_multiconfig(
         metadata, reference, vdj_reference, config_dir, multiconfig_path, fastq_data
     )
-    print(multiconfig_path)
-    print(os.path.exists(multiconfig_path))
 
     cmd = [
         'cellranger',
