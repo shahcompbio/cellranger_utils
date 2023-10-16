@@ -30,7 +30,7 @@ def cli():
 @click.option('--bcr_id', help='cores for cellranger multi')
 @click.option('--numcores', default=16, help='cores for cellranger multi')
 @click.option('--mempercore', default=10, help='cores for cellranger multi')
-def cellranger(
+def cellranger_nonmultiplexed(
         reference,
         vdj_reference,
         gex_fastq,
@@ -48,42 +48,64 @@ def cellranger(
         numcores=16,
         mempercore=10
 ):
+    run_cellranger_non_multiplexed(
+        reference,
+        vdj_reference,
+        gex_fastq,
+        gex_id,
+        outdir,
+        meta_yaml,
+        tempdir,
+        sample_id,
+        tcr_fastq=tcr_fastq,
+        tcr_identifier=tcr_id,
+        cite_fastq=cite_fastq,
+        cite_identifier=cite_id,
+        bcr_fastq=bcr_fastq,
+        bcr_identifier=bcr_id,
+        numcores=numcores,
+        mempercore=mempercore
+    )
 
-    metadata = yaml.safe_load(open(meta_yaml, 'rt'))
-    if 'hashtag' in metadata['meta'] and (tcr_id is not None or bcr_id is not None) and cite_id is not None:
-        run_cellranger_demultiplex(
-            reference,
-            meta_yaml,
-            gex_fastq,
-            gex_id,
-            cite_fastq,
-            cite_id,
-            sample_id,
-            outdir,
-            tempdir,
-            numcores=numcores,
-            mempercore=mempercore
-        )
-    else:
-        run_cellranger_non_multiplexed(
-            reference,
-            vdj_reference,
-            gex_fastq,
-            gex_id,
-            outdir,
-            meta_yaml,
-            tempdir,
-            sample_id,
-            tcr_fastq=tcr_fastq,
-            tcr_identifier=tcr_id,
-            cite_fastq=cite_fastq,
-            cite_identifier=cite_id,
-            bcr_fastq=bcr_fastq,
-            bcr_identifier=bcr_id,
-            numcores=numcores,
-            mempercore=mempercore
-        )
 
+@cli.command()
+@click.option('--reference', required=True, help='CSV file path')
+@click.option('--gex_fastq', required=True, help='cores for cellranger multi')
+@click.option('--gex_id', required=True, help='cores for cellranger multi')
+@click.option('--outdir', required=True, help='cores for cellranger multi')
+@click.option('--meta_yaml', required=True, help='memory for cellranger multi')
+@click.option('--tempdir', required=True, help='cores for cellranger multi')
+@click.option('--sample_id', required=True, help='cores for cellranger multi')
+@click.option('--cite_fastq', help='cores for cellranger multi')
+@click.option('--cite_id', help='cores for cellranger multi')
+@click.option('--numcores', default=16, help='cores for cellranger multi')
+@click.option('--mempercore', default=10, help='cores for cellranger multi')
+def cellranger_demultiplex(
+        reference,
+        gex_fastq,
+        gex_id,
+        outdir,
+        meta_yaml,
+        tempdir,
+        sample_id,
+        cite_fastq=None,
+        cite_id=None,
+        numcores=16,
+        mempercore=10
+):
+    run_cellranger_demultiplex(
+        reference,
+        meta_yaml,
+        gex_fastq,
+        gex_id,
+        cite_fastq,
+        cite_id,
+        sample_id,
+        outdir,
+        tempdir,
+        numcores=numcores,
+        mempercore=mempercore
+    )
 
 
 @cli.command()

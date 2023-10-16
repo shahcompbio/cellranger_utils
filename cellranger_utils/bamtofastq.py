@@ -35,15 +35,13 @@ def find_fastqs_to_use(tempdir, library_id, gem_group):
 
 
 def find_metrics_cellranger(cellranger_dir):
-    sample_id = os.path.basename(cellranger_dir)
-    metrics = f'{cellranger_dir}/outs/per_sample_outs/{sample_id}/metrics_summary.csv'
+    metrics = f'{cellranger_dir}/metrics_summary.csv'
     assert os.path.exists(metrics), metrics
     return metrics
 
 
 def find_bam_cellranger(cellranger_dir):
-    sample_id = os.path.basename(cellranger_dir)
-    bam_file = f'{cellranger_dir}/outs/per_sample_outs/{sample_id}/count/sample_alignments.bam'
+    bam_file = f'{cellranger_dir}/count/sample_alignments.bam'
     assert os.path.exists(bam_file), bam_file
     return bam_file
 
