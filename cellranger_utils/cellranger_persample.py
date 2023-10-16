@@ -51,8 +51,8 @@ def run_cellranger_persample(
         sample_id,
         tcr_fastq=None,
         tcr_identifier=None,
-        cite_fastq=None,
-        cite_identifier=None,
+        cite_hto_fastq=None,
+        cite_hto_identifier=None,
         bcr_fastq=None,
         bcr_identifier=None,
         numcores=16,
@@ -68,7 +68,7 @@ def run_cellranger_persample(
     gex_fastq = os.path.abspath(gex_fastq)
     bcr_fastq = os.path.abspath(bcr_fastq) if bcr_fastq is not None else bcr_fastq
     tcr_fastq = os.path.abspath(tcr_fastq) if tcr_fastq is not None else tcr_fastq
-    cite_fastq = os.path.abspath(cite_fastq) if cite_fastq is not None else cite_fastq
+    cite_fastq = os.path.abspath(cite_hto_fastq) if cite_hto_fastq is not None else cite_hto_fastq
 
     fastq_data = [{'type': 'Gene Expression', 'id': gex_identifier, 'fastq': gex_fastq}, ]
     if bcr_fastq:
@@ -76,7 +76,7 @@ def run_cellranger_persample(
     if tcr_fastq:
         fastq_data.append({'type': 'VDJ-T', 'id': tcr_identifier, 'fastq': tcr_fastq})
     if cite_fastq:
-        fastq_data.append({'type': 'Antibody Capture', 'id': cite_identifier, 'fastq': cite_fastq})
+        fastq_data.append({'type': 'Antibody Capture', 'id': cite_hto_identifier, 'fastq': cite_fastq})
 
     metadata = yaml.safe_load(open(meta_yaml, 'rt'))
     _, num_cells = utils.read_metrics(gex_metrics)
