@@ -76,8 +76,8 @@ def cellranger_nonmultiplexed(
 @click.option('--meta_yaml', required=True, help='memory for cellranger multi')
 @click.option('--tempdir', required=True, help='cores for cellranger multi')
 @click.option('--sample_id', required=True, help='cores for cellranger multi')
-@click.option('--cite_fastq', help='cores for cellranger multi')
-@click.option('--cite_id', help='cores for cellranger multi')
+@click.option('--cite_hto_fastq', help='cores for cellranger multi')
+@click.option('--cite_hto_id', help='cores for cellranger multi')
 @click.option('--numcores', default=16, help='cores for cellranger multi')
 @click.option('--mempercore', default=10, help='cores for cellranger multi')
 def cellranger_demultiplex(
@@ -88,8 +88,8 @@ def cellranger_demultiplex(
         meta_yaml,
         tempdir,
         sample_id,
-        cite_fastq=None,
-        cite_id=None,
+        cite_hto_fastq=None,
+        cite_hto_id=None,
         numcores=16,
         mempercore=10
 ):
@@ -98,8 +98,8 @@ def cellranger_demultiplex(
         meta_yaml,
         gex_fastq,
         gex_id,
-        cite_fastq,
-        cite_id,
+        cite_hto_fastq,
+        cite_hto_id,
         sample_id,
         outdir,
         tempdir,
