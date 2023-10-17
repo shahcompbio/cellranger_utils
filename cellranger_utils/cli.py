@@ -187,10 +187,29 @@ def check_multiplex_status(
 ):
     metadata = yaml.safe_load(open(meta_yaml, 'rt'))
 
-    if 'hashtag' in metadata['meta'] and (tcr_id is not None or bcr_id is not None) and cite_hto_id is not None:
-        print("multiplexed")
-    else:
+    if 'meta' not in metadata:
         print("non-multiplexed")
+        return
+
+    if metadata['meta'] is None:
+        print("non-multiplexed")
+        return
+
+    if 'hashtag' not in metadata['meta']:
+        print("non-multiplexed")
+        return
+
+    # either TCR or BCR must exist  to run all 3 steps
+    if tcr_id is None and bcr_id is None:
+        print("non-multiplexed")
+        return
+
+    # cite and hto comes in a single dir and must exist to run all 3 steps
+    if cite_hto_id is None:
+        print("non-multiplexed")
+        return
+
+    print("multiplexed")
 
 
 if __name__ == "__main__":
