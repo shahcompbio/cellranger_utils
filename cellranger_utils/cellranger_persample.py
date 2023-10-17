@@ -61,6 +61,8 @@ def run_cellranger_persample(
     config_dir = os.path.join(tempdir, 'configs')
     utils.makedirs(config_dir)
 
+    metadata = yaml.safe_load(open(meta_yaml, 'rt'))
+
     config_dir = os.path.abspath(config_dir)
     tempdir = os.path.abspath(tempdir)
     reference = os.path.abspath(reference)
@@ -75,10 +77,9 @@ def run_cellranger_persample(
         fastq_data.append({'type': 'VDJ-B', 'id': bcr_identifier, 'fastq': bcr_fastq})
     if tcr_fastq:
         fastq_data.append({'type': 'VDJ-T', 'id': tcr_identifier, 'fastq': tcr_fastq})
-    if cite_fastq:
+    if cite_fastq and 'citeseq' in metadata['meta']:
         fastq_data.append({'type': 'Antibody Capture', 'id': cite_hto_identifier, 'fastq': cite_fastq})
 
-    metadata = yaml.safe_load(open(meta_yaml, 'rt'))
     _, num_cells = utils.read_metrics(gex_metrics)
     multiconfig_path = os.path.join(config_dir, 'multiconfig.txt')
 
