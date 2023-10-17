@@ -13,17 +13,18 @@ def create_multiconfig(
 ):
     lines = [
         f'[gene-expression]',
-        f'reference,{reference}',
-        f'[vdj]',
-        f'reference,{vdj_reference}',
-
+        f'reference,{reference}'
     ]
-
     if 'hashtag' in metadata['meta']:
         cmo_path = os.path.join(config_dir, 'cmo.txt')
         cmo_path = os.path.abspath(cmo_path)
         utils.create_cmo(metadata, cmo_path)
         lines.extend([f'cmo-set,{cmo_path}'])
+
+    lines += [
+        f'[vdj]',
+        f'reference,{vdj_reference}',
+    ]
 
     lines.extend([f'[libraries]', f'fastq_id,fastqs,feature_types'])
 
@@ -37,7 +38,6 @@ def create_multiconfig(
             sampleid = metadata['meta']['hashtag'][hashtag]['sample_id']
             sampleid = sampleid.replace('#', '_')
             lines.append(f"{sampleid},{hashtag}")
-
 
     with open(multiconfig_path, 'w') as f:
         f.writelines('\n'.join(lines))
