@@ -26,6 +26,13 @@ def create_multiconfig(
         f'reference,{vdj_reference}',
     ]
 
+    if 'citeseq' in metadata['meta']:
+        antibodies_path = os.path.join(config_dir, 'antibodies.txt')
+        antibodies_path = os.path.abspath(antibodies_path)
+        utils.create_antibodies(metadata, antibodies_path)
+        lines.extend([f'[feature]', f'reference,{antibodies_path}'])
+
+
     lines.extend([f'[libraries]', f'fastq_id,fastqs,feature_types'])
 
     for fastq_info in fastq_data:
