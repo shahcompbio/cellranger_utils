@@ -30,6 +30,15 @@ def create_multiconfig(
     for fastq_info in fastq_data:
         lines.append(f"{fastq_info['id']},{fastq_info['fastq']},{fastq_info['type']}")
 
+    if 'hashtag' in metadata['meta']:
+        lines.append('[samples]'),
+        lines.append('sample_id,cmo_ids')
+        for hashtag in metadata['meta']['hashtag'].keys():
+            sampleid = metadata['meta']['hashtag'][hashtag]['sample_id']
+            sampleid = sampleid.replace('#', '_')
+            lines.append(f"{sampleid},{hashtag}")
+
+
     with open(multiconfig_path, 'w') as f:
         f.writelines('\n'.join(lines))
 
