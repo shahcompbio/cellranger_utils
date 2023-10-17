@@ -20,10 +20,10 @@ def create_multiconfig(
     ]
 
     if 'hashtag' in metadata['meta']:
-        antibodies_path = os.path.join(config_dir, 'antibodies.txt')
-        antibodies_path = os.path.abspath(antibodies_path)
-        utils.create_antibodies(metadata, antibodies_path)
-        lines.extend([f'[feature]', f'reference,{antibodies_path}'])
+        cmo_path = os.path.join(config_dir, 'cmo.txt')
+        cmo_path = os.path.abspath(cmo_path)
+        utils.create_cmo(metadata, cmo_path)
+        lines.extend([f'cmo-set,{cmo_path}'])
 
     lines.extend([f'[libraries]', f'fastq_id,fastqs,feature_types'])
 
