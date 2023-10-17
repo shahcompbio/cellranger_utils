@@ -19,7 +19,7 @@ def create_multiconfig(
 
     ]
 
-    if 'citeseq' in metadata['meta']:
+    if 'hashtag' in metadata['meta']:
         antibodies_path = os.path.join(config_dir, 'antibodies.txt')
         antibodies_path = os.path.abspath(antibodies_path)
         utils.create_antibodies(metadata, antibodies_path)
