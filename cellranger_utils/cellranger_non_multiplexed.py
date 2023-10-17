@@ -66,7 +66,7 @@ def run_cellranger_non_multiplexed(
 
     fastq_data = [{'type': 'Gene Expression', 'id': gex_identifier, 'fastq': gex_fastq}]
     if cite_fastq is not None:
-        cite_type = 'Multiplexing Capture' if 'hashtags' in metadata['meta'] else 'Antibody Capture'
+        cite_type = 'Multiplexing Capture' if 'hashtag' in metadata['meta'] else 'Antibody Capture'
         fastq_data.append({'type': cite_type, 'id': cite_identifier, 'fastq': cite_fastq})
     if bcr_fastq is not None:
         fastq_data.append({'type': 'VDJ-B', 'id': bcr_identifier, 'fastq': bcr_fastq})
