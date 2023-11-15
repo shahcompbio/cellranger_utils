@@ -102,7 +102,7 @@ def run_cellranger_non_multiplexed(
         '--csv=' + multiconfig_path,
         '--id=' + sample_id,
         f'--localcores={numcores}',
-        f'--localmem={mempercore}',
+        f'--localmem={mempercore*numcores}',
         '--jobmode=local',
         '--disable-ui'
     ]

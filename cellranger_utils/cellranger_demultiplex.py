@@ -84,7 +84,7 @@ def run_cellranger_demultiplex(
         '--csv=' + multiconfig_path,
         '--id=' + sample_id,
         f'--localcores={numcores}',
-        f'--localmem={mempercore}',
+        f'--localmem={mempercore*numcores}',
         '--jobmode=local',
         '--disable-ui'
     ]
