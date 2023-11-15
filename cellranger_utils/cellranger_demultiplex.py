@@ -1,7 +1,7 @@
 import os
 import yaml
+from glob import glob
 import cellranger_utils.utils as utils
-
 
 def create_multiconfig(
         metadata,
@@ -95,3 +95,10 @@ def run_cellranger_demultiplex(
     os.chdir(cwd)
 
     os.rename(os.path.join(tempdir, sample_id), outdir)
+
+    sampledirs = glob(os.path.join(outdir, 'outs','per_sample_outs', '*'))
+
+    for sampledir in sampledirs:
+        num_reads, num_cells = utils.read_metrics(os.path.join(sampledir, 'metrics_summary.csv'))
+        if num_cells == 0:
+            os.rename(sampledir, os.path.join(outdir, 'zero_cell_samples', os.path.basename(sampledir)))
