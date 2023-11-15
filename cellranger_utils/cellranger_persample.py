@@ -72,12 +72,11 @@ def run_cellranger_persample(
     tcr_fastq = os.path.abspath(tcr_fastq) if tcr_fastq is not None else tcr_fastq
     cite_fastq = os.path.abspath(cite_hto_fastq) if cite_hto_fastq is not None else cite_hto_fastq
 
-    if glob(os.path.join(gex_fastq, '*fastq.gz')) == 0:
+    if len(glob(os.path.join(gex_fastq, '*fastq.gz'))) == 0:
         sample_id = glob(os.path.join(gex_fastq, 'fastqs', '*'))
         assert len(sample_id) == 0
         sample_id = sample_id[0]
         gex_fastq = os.path.join(gex_fastq, 'fastqs', sample_id)
-
 
     fastq_data = [{'type': 'Gene Expression', 'id': gex_identifier, 'fastq': gex_fastq}, ]
     if bcr_fastq:
