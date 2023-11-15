@@ -101,4 +101,5 @@ def run_cellranger_demultiplex(
     for sampledir in sampledirs:
         num_reads, num_cells = utils.read_metrics(os.path.join(sampledir, 'metrics_summary.csv'))
         if num_cells == 0:
+            os.makedirs(os.path.join(outdir, 'zero_cell_samples'))
             os.rename(sampledir, os.path.join(outdir, 'zero_cell_samples', os.path.basename(sampledir)))

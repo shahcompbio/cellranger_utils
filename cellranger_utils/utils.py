@@ -92,6 +92,4 @@ def read_metrics(metrics):
     numreads = str(numreads['Metric Value'].iloc[0])
     numreads = int(numreads.replace(',', '').strip())
 
-    assert not numcells == 0
-
     return numreads, numcells
