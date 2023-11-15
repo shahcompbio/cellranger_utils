@@ -74,7 +74,7 @@ def run_cellranger_persample(
 
     if len(glob(os.path.join(gex_fastq, '*fastq.gz'))) == 0:
         sample_id = glob(os.path.join(gex_fastq, 'fastqs', '*'))
-        assert len(sample_id) == 0
+        assert len(sample_id) == 1
         sample_id = sample_id[0]
         gex_fastq = os.path.join(gex_fastq, 'fastqs', sample_id)
 
