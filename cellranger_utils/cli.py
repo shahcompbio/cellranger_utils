@@ -200,9 +200,9 @@ def check_multiplex_status(
         return
 
     # either TCR or BCR must exist  to run all 3 steps
-    if tcr_id is None and bcr_id is None:
-        print("non-multiplexed")
-        return
+    # if tcr_id is None and bcr_id is None:
+    #     print("non-multiplexed")
+    #     return
 
     # cite and hto comes in a single dir and must exist to run all 3 steps
     if cite_hto_id is None:
