@@ -86,7 +86,8 @@ def run_cellranger_demultiplex(
         f'--localcores={numcores}',
         f'--localmem={mempercore*numcores}',
         '--jobmode=local',
-        '--disable-ui'
+        '--disable-ui',
+        '--nopreflight'
     ]
 
     cwd = os.getcwd()
