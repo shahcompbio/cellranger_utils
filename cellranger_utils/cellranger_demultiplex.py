@@ -16,6 +16,7 @@ def create_multiconfig(
     lines = [
         f'[gene-expression]',
         f'reference,{reference}',
+        f'create-bam,true',
     ]
 
     cmo_path = os.path.join(config_dir, 'cmo.txt')
