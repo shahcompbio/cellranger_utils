@@ -16,6 +16,7 @@ def create_multiconfig(
     lines = [
         f'[gene-expression]',
         f'reference,{reference}',
+        f'create-bam,true',
     ]
 
     cmo_path = os.path.join(config_dir, 'cmo.txt')
@@ -86,7 +87,8 @@ def run_cellranger_demultiplex(
         f'--localcores={numcores}',
         f'--localmem={mempercore*numcores}',
         '--jobmode=local',
-        '--disable-ui'
+        '--disable-ui',
+        '--nopreflight'
     ]
 
     cwd = os.getcwd()

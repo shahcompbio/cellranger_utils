@@ -19,6 +19,7 @@ def create_multiconfig(
         f'[gene-expression]',
         f'reference,{reference}',
         f'force-cells,{num_cells}',
+        f'create-bam,true',
         f'check-library-compatibility,false',
         f'[vdj]',
         f'reference,{vdj_reference}',
@@ -99,7 +100,8 @@ def run_cellranger_persample(
         f'--localcores={numcores}',
         f'--localmem={mempercore*numcores}',
         '--jobmode=local',
-        '--disable-ui'
+        '--disable-ui',
+        '--nopreflight',
     ]
 
     cwd = os.getcwd()
